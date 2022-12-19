@@ -346,7 +346,46 @@ func (pm *pageMeta) mergeBucketCascades(b1, b2 *pagesMapBucket) {
 		}
 	}
 }
+func (pm *pageMeta) setTagsToMetadata(frontmatter map[string]any) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered from error:", r)
+		}
+	}()
 
+	file := pm.File()
+	if len(file.Dir()) > 0 {
+		var dirTagsPath string
+		if strings.HasPrefix(file.Dir(), file.Section()) {
+			dirTagsPath = file.Dir()[len(file.Section())+1:]
+			var dirTags []interface{}
+			for _, s := range strings.Split(dirTagsPath, "/") {
+				if len(s) > 0 {
+					dirTags = append(dirTags, s)
+				}
+			}
+			if dirTags != nil {
+				if tags, ok := frontmatter["tags"]; !ok {
+					frontmatter["tags"] = dirTags
+				} else {
+					switch tags.(type) {
+					case []interface{}:
+						frontmatter["tags"] = append(tags.([]interface{}), dirTags...)
+					case interface{}:
+						frontmatter["tags"] = []interface{}{tags, dirTags}
+					}
+				}
+				fmt.Println("frontmatter:", frontmatter)
+			}
+		}
+	}
+}
+
+func (pm *pageMeta) setTitleToMetadata() {
+	if pm.title == "" {
+		pm.title = pm.File().ContentBaseName()
+	}
+}
 func (pm *pageMeta) setMetadata(parentBucket *pagesMapBucket, p *pageState, frontmatter map[string]any) error {
 	pm.params = make(maps.Params)
 
@@ -435,6 +474,9 @@ func (pm *pageMeta) setMetadata(parentBucket *pagesMapBucket, p *pageState, fron
 	var sitemapSet bool
 
 	var draft, published, isCJKLanguage *bool
+
+	pm.setTagsToMetadata(frontmatter)
+
 	for k, v := range frontmatter {
 		loki := strings.ToLower(k)
 
@@ -618,6 +660,10 @@ func (pm *pageMeta) setMetadata(parentBucket *pagesMapBucket, p *pageState, fron
 		}
 	}
 
+	// custom metadata settings
+	pm.setTitleToMetadata()
+
+	fmt.Println("frontmatter", frontmatter)
 	if !sitemapSet {
 		pm.sitemap = p.s.siteCfg.sitemap
 	}

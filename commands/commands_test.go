@@ -33,6 +33,23 @@ import (
 	qt "github.com/frankban/quicktest"
 )
 
+func TestMy(t *testing.T) {
+	//c := qt.New(t)
+	dir := "/Users/peng/PROGRAM/GitHub/hugo-my"
+	resp := Execute([]string{"-s=" + dir, "serve",
+		"-p", "1315",
+		"--debug",
+	})
+	//c.Run("hugo", func(c *qt.C) {
+	//c.Assert(resp.Err, qt.IsNil)
+	result := resp.Result
+	fmt.Println(result)
+	//c.Assert(len(result.Sites) == 1, qt.Equals, true)
+	//c.Assert(len(result.Sites[0].RegularPages()) == 2, qt.Equals, true)
+	//c.Assert(result.Sites[0].Info.Params()["myparam"], qt.Equals, "paramproduction")
+	//})
+}
+
 func TestExecute(t *testing.T) {
 	c := qt.New(t)
 
