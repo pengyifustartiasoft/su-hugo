@@ -113,6 +113,7 @@ require (
 	github.com/mattn/go-ieproxy v0.0.1 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa // indirect
@@ -128,4 +129,5 @@ require (
 
 go 1.18
 
-replace github.com/gohugoio/hugo => github.com/SuCicada/su-hugo v0.108.0
+require github.com/gohugoio/hugo v0.108.0
+replace github.com/gohugoio/hugo v0.108.0 => github.com/SuCicada/su-hugo su_dev
