@@ -375,7 +375,7 @@ func (pm *pageMeta) setTagsToMetadata(frontmatter map[string]any) {
 						frontmatter["tags"] = []interface{}{tags, dirTags}
 					}
 				}
-				fmt.Println("frontmatter:", frontmatter)
+				//fmt.Println("frontmatter:", frontmatter)
 			}
 		}
 	}
