@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - su_dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18.x
+      - name: Build
+        run: |
+          mkdir ./bin
+          GOOS=linux GOARCH=amd64 go build -o ./bin/su-hugo_linux-64 -v -x
+      - name: Delete older release
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          keep_latest: 0
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: su-hugo
+          release_name: Release latest
+          draft: false
+          prerelease: false
+#          file_glob: ./bin/*
+#          commit_ish: su_dev
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./bin/su-hugo_linux-64
+          asset_name: su-hugo_linux-64
+          asset_content_type: application/zip
