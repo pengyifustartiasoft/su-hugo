@@ -7,12 +7,16 @@ jobs:
     docker:
       - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
 #    parallelism: 3
+    filters:
+      branches:
+        only:
+          - circleci  # 指定只在 main 分支上运行
     steps:
       - checkout  # 检出代码仓库
 #      - run:
 #          name: Run Tests
 #          command: go test ./bufferpool/...
-      - run: go mod download -v
+      - run: go mod download -x
 #      - run:
 #          go test   -timeout  30m -v -cover  -run="^Test.*" -coverpkg=./... ./...
 #          -coverprofile=/tmp/coverage.out
