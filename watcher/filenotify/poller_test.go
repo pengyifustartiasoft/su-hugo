@@ -44,6 +44,10 @@ func TestPollerAddRemove(t *testing.T) {
 	c.Assert(w.Remove(f.Name()), qt.IsNil)
 
 }
+func TestPollerEvent1(t *testing.T) {
+	c := qt.New(t)
+	c.Assert(2, qt.Equals, 22)
+}
 
 func TestPollerEvent(t *testing.T) {
 	c := qt.New(t)
