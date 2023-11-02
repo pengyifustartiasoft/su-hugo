@@ -1,16 +1,12 @@
-environment: &buildenv
-  GOMODCACHE: /root/project/gomodcache
+#environment: &buildenv/
+#  GOMODCACHE: /root/project/gomodcache
 
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
 #    parallelism: 3
-    filters:
-      branches:
-        only:
-          - circleci  # 指定只在 main 分支上运行
     steps:
       - checkout  # 检出代码仓库
 #      - run:
@@ -31,3 +27,11 @@ jobs:
 #      - run: go test ./config/...
 #      - run: go test ./hugolib/...
 
+workflows:
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - circleci  # 指定只在 main 分支上运行
