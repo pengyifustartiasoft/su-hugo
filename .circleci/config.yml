@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout  # 检出代码仓库
       - run: docker run -itd --name redis -p 6379:6379 redis
-      - run: apt update && apt install net-tools
+      - run: sudo apt update && apt install net-tools
       - run: netstat -tunlp
 #      - run:
 #          name: Run Tests
