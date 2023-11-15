@@ -12,11 +12,13 @@ jobs:
     steps:
       - checkout  # 检出代码仓库
       - run: docker run -itd --name redis -p 6379:6379 redis
+      - run: docker ps -a
       - run: sudo apt update && sudo apt install net-tools
       - run: netstat -tunlp
 #      - run:
 #          name: Run Tests
 #          command: go test ./bufferpool/...
+      - run: ls -l 
       - run: go mod download -x
 #      - run:
 #          go test   -timeout  30m -v -cover  -run="^Test.*" -coverpkg=./... ./...
