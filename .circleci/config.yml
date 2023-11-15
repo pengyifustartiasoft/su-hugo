@@ -17,9 +17,10 @@ jobs:
       #     docker_layer_caching: true
 
       - run: docker run -d --name redis -p 6379:6379 redis
-      # - run: docker ps -a
+      - run: docker ps -a
+      - run: docker logs redis
       # - run: sudo apt update && sudo apt install net-tools
-      - run: netstat -tunlp
+      # - run: netstat -tunlp
       # - run: watch date
 
 #      - run:
