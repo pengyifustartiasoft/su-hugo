@@ -4,11 +4,15 @@
 version: 2.1
 jobs: 
   test:
-    docker:
-      - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
+    machine:
+      image: circleci/classic:edge
+    # docker:
+      # - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
 #    parallelism: 3
     steps:
       - checkout  # 检出代码仓库
+      - run: docker run -itd --name redis -p 6379:6379 redis
+
 #      - run:
 #          name: Run Tests
 #          command: go test ./bufferpool/...
