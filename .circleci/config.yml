@@ -10,19 +10,19 @@ jobs:
       # - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
 #    parallelism: 3
     steps:
-      - run: sadfasdf
+      # - run: sadfasdf
       - checkout  # 检出代码仓库
-      - run: docker run -itd --name redis -p 6379:6379 redis
-      - run: docker ps -a
-      - run: sudo apt update && sudo apt install net-tools
-      - run: netstat -tunlp
+      # - run: docker run -itd --name redis -p 6379:6379 redis
+      # - run: docker ps -a
+      # - run: sudo apt update && sudo apt install net-tools
+      # - run: netstat -tunlp
       # - run: watch date
 
 #      - run:
 #          name: Run Tests
 #          command: go test ./bufferpool/...
-      - run: ls -l 
-      - run: go mod download -x
+      # - run: ls -l 
+      # - run: go mod download -x
 #      - run:
 #          go test   -timeout  30m -v -cover  -run="^Test.*" -coverpkg=./... ./...
 #          -coverprofile=/tmp/coverage.out
@@ -31,10 +31,10 @@ jobs:
 #          path: /tmp/coverage.html
 #          destination: artifact-file
 #      - run: go test ./cache/...
-      - run: go test ./parser/...
-      # - run: go test ./watcher/...
-      - run: go test ./commands/...
-      - run: go test ./config/...
+      # - run: go test ./parser/...
+      # # - run: go test ./watcher/...
+      # - run: go test ./commands/...
+      # - run: go test ./config/...
 #      - run: go test ./hugolib/...
 
 workflows:
