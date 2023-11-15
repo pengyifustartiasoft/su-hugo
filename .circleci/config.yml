@@ -4,19 +4,19 @@
 version: 2.1
 jobs: 
   test:
-    # machine:
-      # image: ubuntu-2004:202010-01
-    docker:
-      - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
+    machine:
+      image: ubuntu-2004:202010-01
+    # docker:
+    #   - image: golang:1.18  # 使用您需要的 Go 版本的 Docker 镜像
 #    parallelism: 3
     steps:
       # - run: sadfasdf
       - checkout  # 检出代码仓库
-      - setup_remote_docker:
-          version: 20.10.14
-          docker_layer_caching: true
+      # - setup_remote_docker:
+      #     version: 20.10.14
+      #     docker_layer_caching: true
 
-      - run: docker run -itd --name redis -p 6379:6379 redis
+      - run: docker run -d --name redis -p 6379:6379 redis
       # - run: docker ps -a
       # - run: sudo apt update && sudo apt install net-tools
       - run: netstat -tunlp
