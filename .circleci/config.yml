@@ -36,11 +36,13 @@ jobs:
           go test   -timeout  30m -v -cover  -run="^Test.*" -coverpkg=./... ./config/... -coverprofile=/tmp/coverage.out
       - run: go tool cover -html=/tmp/coverage.out -o /tmp/coverage.html
       - store_test_results:
-          path: /tmp/coverage_all.out
+          path: /tmp/coverage.out
 
       - store_artifacts:
          path: /tmp/coverage.html
-         destination: artifact-file
+         destination: coverage.html
+      
+
 #      - run: go test ./cache/...
       # - run: go test ./parser/...
       # # - run: go test ./watcher/...
