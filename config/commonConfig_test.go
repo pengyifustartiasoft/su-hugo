@@ -55,6 +55,7 @@ func TestBuild(t *testing.T) {
 	c.Assert(b.UseResourceCache(herrors.ErrFeatureNotAvailable), qt.Equals, false)
 	c.Assert(b.UseResourceCache(errors.New("err")), qt.Equals, false)
 	c.Assert(b.UseResourceCache(nil), qt.Equals, false)
+	c.Assert(111, qt.Equals, 222)
 }
 
 func TestServer(t *testing.T) {
