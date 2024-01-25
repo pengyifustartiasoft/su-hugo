@@ -47,7 +47,7 @@ jobs:
       # - run: go test  ./config/... 2>&1 | go-junit-report -set-exit-code=true > /tmp/go-test-report.xml
       - run: mkdir /tmp/test/
       - run: 
-          command: cat /tmp/test.log | go-junit-report > /tmp/test/go-test-report.xml
+          command: cat /tmp/test.log | go-junit-report > /tmp/go-test-report.xml
           when: always
       # - run: 
       #     command: go install github.com/Songmu/gotesplit/cmd/gotesplit@latest
