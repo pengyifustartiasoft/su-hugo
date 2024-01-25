@@ -45,12 +45,14 @@ jobs:
       # - run: go test  ./config/... 2>&1 | go-junit-report -set-exit-code=true > /tmp/go-test-report.xml
       - run: mkdir /tmp/test/
       - run: cat /tmp/test.log | go-junit-report > /tmp/test/go-test-report.xml
+      - run: go install github.com/Songmu/gotesplit/cmd/gotesplit@latest
+      - run: gotesplit -junit-dir=build/test-results ./config/...
       - save_cache: 
           key: v1-pkg-cache
           paths:
             - "/go/pkg"
       - store_test_results:
-          path: /tmp/test
+          path: build/test-results
       - store_artifacts:
          path: /tmp/
          destination: coverage.html
