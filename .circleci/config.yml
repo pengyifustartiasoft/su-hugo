@@ -49,7 +49,7 @@ jobs:
           paths:
             - "/go/pkg"
       - store_test_results:
-          path: /tmp/
+          path: /tmp/go-test-report.xml
       - store_artifacts:
          path: /tmp/
          destination: coverage.html
