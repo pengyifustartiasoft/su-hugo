@@ -44,7 +44,7 @@ jobs:
       - run: go install github.com/jstemmer/go-junit-report/v2@latest
       # - run: go test  ./config/... 2>&1 | go-junit-report -set-exit-code=true > /tmp/go-test-report.xml
       - run: mkdir /tmp/test/
-      - run: cat /tmp/test.log | go-junit-report > /tmp/testgo-test-report.xml
+      - run: cat /tmp/test.log | go-junit-report > /tmp/test/go-test-report.xml
       - save_cache: 
           key: v1-pkg-cache
           paths:
