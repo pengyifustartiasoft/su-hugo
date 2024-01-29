@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    branches:
-      - su_dev
+    branches: [ master ]
 
 jobs:
   build:
