@@ -1,0 +1,20 @@
+name: Delete Tag
+
+on:
+  delete:
+    tags:
+      - '*'
+#    branches:
+#      - su_dev
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ${GITHUB_REF##*/}
+      - name: Set env
+        run: echo "TAG_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - uses: liudonghua123/delete-release-action@v1
+        with:
+          release_name: ${{env.TAG_VERSION}}
