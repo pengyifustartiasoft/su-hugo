@@ -19,3 +19,4 @@ jobs:
         with:
           tag_name: ${{env.TAG_VERSION}}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          delete_release: true
