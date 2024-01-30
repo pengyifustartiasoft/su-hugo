@@ -15,8 +15,15 @@ jobs:
       - run: echo ${GITHUB_REF##*/}
       - name: Set env
         run: echo "TAG_VERSION=${{github.event.ref}}" >> $GITHUB_ENV
-      - uses: dev-drprasad/delete-tag-and-release@v1.0 # PRERELEASE is v1.0 and can also be used to test and give us feedback
+#      - uses: dev-drprasad/delete-tag-and-release@v1.0 # PRERELEASE is v1.0 and can also be used to test and give us feedback
+#        with:
+#          tag_name: ${{env.TAG_VERSION}}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          delete_release: true
+      - name: Delete Release
+        uses: larryjoelane/delete-release-action@v1.0.24
         with:
-          tag_name: ${{env.TAG_VERSION}}
+          release-name: ${{env.TAG_VERSION}}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_release: true
+
+
