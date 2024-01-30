@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo ${GITHUB_REF##*/}
       - name: Set env
-        run: echo "TAG_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        run: echo "TAG_VERSION=${{github.event.ref}}" >> $GITHUB_ENV
       - uses: dev-drprasad/delete-tag-and-release@v1.0 # PRERELEASE is v1.0 and can also be used to test and give us feedback
         with:
           tag_name: ${{env.TAG_VERSION}}
